@@ -47,7 +47,7 @@ void puntoFijo(int a, int b, float x0, float error){
             x = gx;
             gx = funcion_g(x);
        
-            error_calculado = ((x-x_ant)/x)*100;
+            error_calculado = abs(((x-x_ant)/x))*100;
               
             i++;
 
