@@ -18,9 +18,9 @@ double F(double x){
     return exp(-x) - log(x);
 }
 double biseccion(double a,double b,int MAXIT,double TOL,double EX){
-    int cont=0;
+    double cont=0.0;
     string esp = "    ";
-    double m, mx= 1000;
+    double m, mx= 1000.0;
     double fm;
     while(cont<MAXIT){
     	 //&& mx>EX
@@ -33,8 +33,9 @@ double biseccion(double a,double b,int MAXIT,double TOL,double EX){
         fm=F(m);
         
         // impresion linea de resultados 
-        
+        cout<<"i"<<"   "<<"xa"<<"        "<<"xb"<<"        "<<"m"<<"        "<<"f(xa)"<<"        "<<"f(xb)"<<"        "<<"f(m)"<<"        "<<"error"<<endl;
         cout << cont << esp << a << esp << b << esp << m << esp << F(a) << esp << F(b) << esp << fm << esp << mx << endl;
+        cout<<endl;
         
         if(abs(b-a)<TOL)
           return m;
@@ -46,12 +47,14 @@ double biseccion(double a,double b,int MAXIT,double TOL,double EX){
             a=m;
         cont=cont+1;
     }
-    return m;
+    return m, cont, mx;
 } 
 
 int main (int argc, char *argv[]) {
     int xa, xb;
     float error, float_error;
+    double m, res_error =0.0;
+    int i;
     cout<<"Ingresa los valores iniciales"<<endl;
     cout<<"Xa: ";
     cin>>xa; 
@@ -64,7 +67,10 @@ int main (int argc, char *argv[]) {
     
     cout<<"float error"<<float_error<<endl;  
 
-    cout<<biseccion(xa,xb,100,float_error,float_error);
+    m, i, res_error = biseccion(xa,xb,100,float_error,float_error);
+    cout<<endl;
+
+    cout<<"La reiz es (m) "<<m<<" en (i)"<<i<<" iteraciones con error "<<res_error<<"%"<<endl;
     return 0; 
 }
 
