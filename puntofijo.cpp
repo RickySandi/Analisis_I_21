@@ -13,24 +13,24 @@ RESULTADOS:
 */
 double funcion(double x){
 
-	return exp(-x) + x - 2;	
+	return 1/x - exp(x);	
 }
 
 double funcion_g(double x){
 
-	return 2 - (exp(-x)); 
+	return exp(1/x); 
 
 }
 double funcion_g_prima(double x){
 
-	return exp(-x); 
+	return -exp(1/x) * pow(x,-2); 
 
 }
 // void imprimir_valores(){
 
 // }
 
-void puntoFijo(int a, int b, float x0, float error){
+void puntoFijo(float a, float b, float x0, float error){
      
     if(funcion_g_prima(a) <=1 && funcion_g_prima(b) <=1 && funcion_g_prima(x0) <=1){
             int i =0; 
@@ -61,7 +61,7 @@ void puntoFijo(int a, int b, float x0, float error){
 } 
 
 int main (int argc, char *argv[]) {
-    int xa, xb, x0;
+    float xa, xb, x0;
     float error; 
 
     cout<<"Ingresa xa: ";
@@ -73,7 +73,7 @@ int main (int argc, char *argv[]) {
     cout<<"Ingresa el error: ";
     cin>>error;
 
-    error = error / 10;
+    error = error;
 
     puntoFijo(xa, xb, x0, error);
     // intervalos (a,b, #interaciones, tol, error)

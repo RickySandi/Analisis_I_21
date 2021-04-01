@@ -11,31 +11,45 @@ double f(double x){
 
 int main()
 {
-    double x,x0,x1,e,fx0,fx1,err;
-    int iter = 0;
+    double x,xi,xi_1,xi_2,e,fxi,fxi_1,err,x2_ant;
+    int iter2=0; 
     cout.precision(4);
     cout<<"Ingresa los valores iniciales\n";
-    cout<<"x0 = ";
-    cin>>x;
-    cout<<"x1 = ";
-    cin>>x0;
+    cout<<"xi = ";
+    cin>>xi;
+    cout<<"xi + 1 = ";
+    cin>>xi_1;
     cout<<"Ingresa el error\n";
     cin>>e;
-    cout <<"x{i}"<<"     "<<"x{i+1}"<<"     "<<"f(xi)"<<"     "<<"f(xi +1)"<<"     "<<"error"<<endl;
+    cout <<"x{i}"<<"     "<<"x{i+1}"<<"     "<<"x(i+2)"<<"     "<<"f(xi)"<<"     "<<"f(xi +1)"<<"     "<<"error"<<endl;
 
     do
-    {
-        x1 = x0;
-        x0=x;
-        fx0=f(x0);
-        fx1 = f(x1);
-        x = x1-((fx1*(x0-x1))/(fx0-fx1));
-        err = fabs(x-x0);
-        cout<<x0<<"        "<<x1<<"        "<<fx0<<"        "<<fx1<<"        "<<err<<endl;
+    { 
+       fxi = f(xi); 
+       fxi_1 = f(xi_1); 
+
+        xi_2 = xi_1 - (((fxi_1)*(xi - xi_1)) /(fxi - fxi_1));
+        //x2_ant = xi_2;
+        err = abs((xi_2-xi) /xi_2) * 100; 
+
+        if(err > e && iter2 >=1 ){
+            xi = xi_1;
+            xi_1 = xi_2; 
+
+            fxi = fxi_1;
+            //fxi_1 = fxi_2;
+
+            // iter ++; 
+        }
+
+       
+    
+        cout<<xi<<"        "<<xi_1<<"        "<<xi_2<<"        "<<fxi<<"        "<<fxi_1<<"        "<<err<<endl;
         cout<<"Error Absoluto "<<err<<"\n"<<endl;
-        iter++;
+        iter2 ++;
+        
     }while (err>e);
-    cout<<"La raiz de la encuacion es "<<x1<<endl;
-    cout<<"Iteraciones: "<<iter -1<<endl;
+    cout<<"La raiz de la encuacion es "<<xi_2<<endl;
+    cout<<"Iteraciones: "<<iter2 -1<<endl;
     return 0;
 }
